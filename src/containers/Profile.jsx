@@ -5,7 +5,7 @@ import TextField from '../components/TextField';
 import { Todos, FirebaseContext } from '../Firebase';
 import '../App.css';
 
-const TodosList = () => {
+const Profile = () => {
   const [todos, setTodos] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [value, setValue] = useState('');
@@ -74,13 +74,12 @@ const TodosList = () => {
     };
   }, [user?.email]);
 
-  if (!user?.email || !loaded) return <Spinner marginX="auto" marginTop="50px" />;
+  if (!user?.email || !loaded) return <Spinner />;
 
   return (
     <div className="todos-list-container">
       <p className="welcome-header">{`Welcome, ${user.email}`}</p>
       <TextField
-        id="create-todo"
         value={value}
         setValue={(v) => setValue(v)}
         onSubmit={submitTodo}
@@ -103,4 +102,4 @@ const TodosList = () => {
   );
 };
 
-export default TodosList;
+export default Profile;
