@@ -1,0 +1,27 @@
+@media only screen and (max-width: 600px)  {
+  .main-container {
+    margin: 20px 30px;
+  }
+
+  .todo-field {
+    display: flex;
+  }
+
+  .todo-field input {
+    width: 100%;
+  }
+
+  .todos-list-container li {
+    margin: auto;
+    width: 100%;
+  }
+
+  /* sign-up */
+  .sign-up-image-wrapper {
+    display: none;
+  }
+
+  .sign-up-form {
+    width: 100%;
+  }
+}
