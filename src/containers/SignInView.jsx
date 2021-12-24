@@ -63,7 +63,7 @@ const SignInView = () => {
             required
           />
 
-          <Link to="/signup/">Are you new here? sign up</Link>
+          <Link to="/signup">Are you new here? sign up</Link>
 
           <Button
             borderRadius={17}

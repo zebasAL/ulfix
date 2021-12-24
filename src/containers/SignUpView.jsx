@@ -94,7 +94,7 @@ const SignUpView = () => {
             required
           />
 
-          <Link to="/signin/">Already have an account? sign in</Link>
+          <Link data-cy="redirect-to-signin" to="/signin">Already have an account? sign in</Link>
 
           <Button
             borderRadius={17}

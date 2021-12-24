@@ -77,28 +77,30 @@ const TodosList = () => {
   if (!user?.email || !loaded) return <Spinner marginX="auto" marginTop="50px" />;
 
   return (
-    <div className="todos-list-container">
-      <p className="welcome-header">{`Welcome, ${user.email}`}</p>
-      <TextField
-        id="create-todo"
-        value={value}
-        setValue={(v) => setValue(v)}
-        onSubmit={submitTodo}
-        label="Type a new todo and press 'Enter'"
-        type="text"
-      />
+    <div className="main-container">
+      <div className="todos-list-container">
+        <p data-cy="wlecome-header" className="welcome-header">{`Welcome, ${user.email}`}</p>
+        <TextField
+          id="create-todo"
+          value={value}
+          setValue={(v) => setValue(v)}
+          onSubmit={submitTodo}
+          label="Type a new todo and press 'Enter'"
+          type="text"
+        />
 
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.key}>
-            <TodoField
-              message={todo.message}
-              updateTodo={(term) => updateTodo(todo.key, term)}
-            />
-            <DeleteIcon className="delete-todo-button" type="button" color="muted" onClick={() => deleteTodo(todo.key)} />
-          </li>
-        ))}
-      </ul>
+        <ul>
+          {todos.map((todo) => (
+            <li key={todo.key}>
+              <TodoField
+                message={todo.message}
+                updateTodo={(term) => updateTodo(todo.key, term)}
+              />
+              <DeleteIcon className="delete-todo-button" type="button" color="muted" onClick={() => deleteTodo(todo.key)} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

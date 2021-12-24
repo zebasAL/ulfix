@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import {
-  getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,
+  getAuth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser,
 } from 'firebase/auth';
 import {
   getDatabase, ref, set, push, child, onValue, equalTo, query, orderByChild,
@@ -60,9 +62,7 @@ export const databaseRef = getDatabase(firebase);
 
 export const Todos = {
   createTodo: (data) => push(child(ref(databaseRef), 'todos/'), { ...data }),
-
   getTodos: (email, cb) => onValue(query(ref(databaseRef, 'todos/'), orderByChild('email'), equalTo(email)), cb),
-
   updateOrDestroyTodo: (data, key) => set(ref(databaseRef, `todos/${key}`), data && { ...data }),
 };
 
@@ -72,6 +72,7 @@ export const Users = {
   updateOrDestroyProfile: (data, key) => set(ref(databaseRef, `profiles/${key}`), data && { ...data }),
   signUpUser: (email, password) => createUserWithEmailAndPassword(appAuth, email, password),
   logOutUser: () => signOut(appAuth),
+  deleteUser: (user) => deleteUser(user),
   signInUser: (email, password) => signInWithEmailAndPassword(appAuth, email, password),
 };
 

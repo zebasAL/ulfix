@@ -20,7 +20,7 @@ const SignOutView = () => {
     handleLogout();
   }, []);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner marginX="auto" marginTop="50px" />;
 
   return (
     <div>
