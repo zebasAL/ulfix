@@ -10,8 +10,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - run: chmod +x ./setup_env.sh
-      - run: less ./.env
+      - name: Setup environment
+      run:  |
+        chmod +x ./setup_env.sh
+        ./setup_env.sh
+        less ./.env
+      - name: End to end testing
       - uses: cypress-io/github-action@v2
         with:
           start: yarn start
