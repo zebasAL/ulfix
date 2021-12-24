@@ -24,6 +24,7 @@ jobs:
       - name: Test
         run: CI=true npx cypress run
   build_and_deploy:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
