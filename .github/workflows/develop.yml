@@ -10,7 +10,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - run: sudo ./setup_env.sh
+      - run: chmod +x ./setup_env.sh
       - uses: cypress-io/github-action@v2
         with:
           start: yarn start
