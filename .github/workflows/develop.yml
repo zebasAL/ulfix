@@ -11,6 +11,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - run: chmod +x ./setup_env.sh
+      - run: less ./.env
       - uses: cypress-io/github-action@v2
         with:
           start: yarn start
