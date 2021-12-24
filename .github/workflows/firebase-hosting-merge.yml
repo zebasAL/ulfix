@@ -20,10 +20,9 @@ jobs:
 
       - name: Install dependencies
         run: yarn install 
-      - name: Start server
-        run: yarn start 
       - name: Test
-        run: CI=true npx cypress run
+        # start the server in the background
+        run: yarn start & npx cypress run
   build_and_deploy:
     needs: test
     runs-on: ubuntu-latest
