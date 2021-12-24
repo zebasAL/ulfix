@@ -2,28 +2,39 @@
 import React, { useState } from 'react';
 import { Button, SendMessageIcon, toaster } from 'evergreen-ui';
 import { useNavigate, Link } from 'react-router-dom';
-import TextField from '../components/TextField';
-import { Users } from '../Firebase';
-import photo from '../assets/Boost-Productivity.jpg';
-import logo from '../assets/horizontal-logo.png';
+import TextField from '../../components/TextField';
+import { Users } from '../../Firebase';
+import photo from '../../assets/Boost-Productivity.jpg';
+import logo from '../../assets/horizontal-logo.png';
 
-const SignInView = () => {
+const SignUpView = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [userForm, setUserForm] = useState({ email: '', password: '' });
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [userForm, setUserForm] = useState({ name: '', email: '', password: '' });
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    Users.signInUser(userForm.email, userForm.password)
+    Users.signUpUser(userForm.email, userForm.password)
       .then(() => {
-        toaster.success('Signed in successfully');
-        navigate('/');
+        Users.createProfile({
+          name: userForm.name,
+          email: userForm.email,
+          created_at: Date.now().toString(),
+        })
+          .then(() => {
+            toaster.success('Signed up successfully');
+            navigate('/');
+          })
+          .catch(() => {
+            toaster.warning('Something went wrong, try again');
+          });
       })
       .catch(() => {
         setIsLoading(false);
-        toaster.warning('Something went wrong');
+        toaster.warning('That User already exists, try again with another email');
       });
   };
 
@@ -37,8 +48,19 @@ const SignInView = () => {
         <img alt="SignUp" src={photo} />
       </div>
       <form className="sign-up-form" onSubmit={(e) => handleSubmit(e)}>
-        <p>Sign In</p>
+        <p>Sign Up</p>
         <div className="sign-up-wrapper">
+          <label htmlFor="name">Name:</label>
+          <TextField
+            id="name"
+            label="Type your name"
+            value={userForm.name}
+            setValue={(value) => setUserForm((prevState) => ({
+              ...prevState, name: value,
+            }))}
+            type="text"
+          />
+
           <label htmlFor="email">Email:</label>
           <TextField
             id="email"
@@ -63,7 +85,16 @@ const SignInView = () => {
             required
           />
 
-          <Link to="/signup">Are you new here? sign up</Link>
+          <TextField
+            id="confirm-password"
+            label="Confirm your password"
+            value={confirmPassword}
+            setValue={(value) => setConfirmPassword(value)}
+            type="password"
+            required
+          />
+
+          <Link data-cy="redirect-to-signin" to="/signin">Already have an account? sign in</Link>
 
           <Button
             borderRadius={17}
@@ -75,14 +106,16 @@ const SignInView = () => {
             margin="auto"
             marginTop={30}
             iconAfter={SendMessageIcon}
-            disabled={!userForm.email || !userForm.password}
+            disabled={!userForm.name || !userForm.email || !userForm.password
+            || (confirmPassword !== userForm.password)}
           >
             Submit
           </Button>
+          `
         </div>
       </form>
     </div>
   );
 };
 
-export default SignInView;
+export default SignUpView;

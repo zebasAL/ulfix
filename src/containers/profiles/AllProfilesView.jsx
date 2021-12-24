@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'evergreen-ui';
-import { Users } from '../Firebase';
-import '../App.css';
+import { Users } from '../../Firebase';
+import '../../App.css';
 
-const AllUsersView = () => {
+const AllProfilesView = () => {
   const [profiles, setProfiles] = useState([]);
 
-  const getDate = (date) => date && new Date(parseInt(date, 10)).getDate();
+  const getDate = (date) => {
+    if (date) {
+      return new Date(parseInt(date, 10)).toLocaleString('en-us', { month: 'short', year: 'numeric', day: 'numeric' });
+    }
+    return 'no date found';
+  };
 
   useEffect(() => {
     const unsubscribeTodoList = Users.getProfile(null, (snapshot) => {
@@ -35,7 +40,7 @@ const AllUsersView = () => {
             <Table.TextHeaderCell>EMAIL</Table.TextHeaderCell>
             <Table.TextHeaderCell>MEMBER SINCE</Table.TextHeaderCell>
           </Table.Head>
-          <Table.Body height={240}>
+          <Table.Body height={400}>
             {profiles.map((profile) => (
               <Table.Row is={Link} key={profile.email} isSelectable to={`/profiles/${profile.key}`}>
                 <Table.TextCell>{profile.name}</Table.TextCell>
@@ -50,4 +55,4 @@ const AllUsersView = () => {
   );
 };
 
-export default AllUsersView;
+export default AllProfilesView;

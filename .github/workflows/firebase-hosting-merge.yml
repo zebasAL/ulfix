@@ -12,22 +12,27 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      - name: Installs Node js
-        uses: actions/setup-node@v1
+      - uses: cypress-io/github-action@v2
         with:
-          node-version: 14.x
-
-      - name: Install dependencies
-        run: yarn install 
-      - name: Test
-        # start the server in the background
-        run: yarn start & npx cypress run
+          start: yarn start
+          wait-on: "http://localhost:3000"
+          headless: true
   build_and_deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run:  |
+          touch .env
+          echo REACT_APP_API_KEY="${secrets.REACT_APP_API_KEY}" >> .env
+          echo REACT_APP_APP_ID="${secrets.REACT_APP_APP_ID}" >> .env
+          echo REACT_APP_AUTH_DOMAIN="${secrets.REACT_APP_AUTH_DOMAIN}" >> .env
+          echo REACT_APP_DATABASE_URL="${secrets.REACT_APP_DATABASE_URL}" >> .env
+          echo REACT_APP_MEASUREMENT_ID="${secrets.REACT_APP_MEASUREMENT_ID}" >> .env
+          echo REACT_APP_MESSAGING_SENDER_ID="${secrets.REACT_APP_MESSAGING_SENDER_ID}" >> .env
+          echo REACT_APP_PROJECT_ID="${secrets.REACT_APP_PROJECT_ID}" >> .env
+          echo REACT_APP_STORAGE_BUCKET="${secrets.REACT_APP_STORAGE_BUCKET}" >> .env
+          cat .env
       - run: yarn install && yarn run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

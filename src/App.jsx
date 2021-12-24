@@ -2,11 +2,11 @@ import React from 'react';
 import {
   BrowserRouter as Router, Route, Routes as Switch, Navigate,
 } from 'react-router-dom';
-import SignInView from './containers/SignInView';
-import SignUpView from './containers/SignUpView';
-import SignOutView from './containers/SignOutView';
+import SignInView from './containers/user/SignInView';
+import SignUpView from './containers/user/SignUpView';
+import SignOutView from './containers/user/SignOutView';
 import TodosList from './containers/TodosList';
-import AllUsersView from './containers/AllUsersView';
+import AllProfilesView from './containers/profiles/AllProfilesView';
 import ProfileView from './containers/profiles/ProfileView';
 import './App.css';
 import { FirebaseProvider } from './Firebase';
@@ -22,7 +22,7 @@ const Routes = () => (
         <Route exact path="/signin" element={<SignInView />} />
 
         <Route exact path="/" element={<PrivateRoute><TodosList /></PrivateRoute>} />
-        <Route exact path="/profiles" element={<AllUsersView />} />
+        <Route exact path="/profiles" element={<AllProfilesView />} />
         <Route exact path="/profiles/:key" element={<PrivateRoute><ProfileView /></PrivateRoute>} />
         <Route exact path="/logout" element={<SignOutView />} />
         <Route path="*" element={<Navigate to="/" />} />
