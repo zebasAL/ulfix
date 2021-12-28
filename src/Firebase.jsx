@@ -69,6 +69,7 @@ export const Todos = {
 export const Users = {
   createProfile: (data) => push(child(ref(databaseRef), 'profiles/'), { ...data }),
   getProfile: (key, cb) => onValue(ref(databaseRef, key ? `profiles/${key}` : 'profiles/'), cb),
+  getProfileByEmail: (email, cb) => onValue(query(ref(databaseRef, 'profiles/'), orderByChild('email'), equalTo(email)), cb),
   updateOrDestroyProfile: (data, key) => set(ref(databaseRef, `profiles/${key}`), data && { ...data }),
   signUpUser: (email, password) => createUserWithEmailAndPassword(appAuth, email, password),
   logOutUser: () => signOut(appAuth),

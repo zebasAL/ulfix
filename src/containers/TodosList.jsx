@@ -20,14 +20,14 @@ const TodosList = () => {
     Todos.createTodo(newTodo)
       .then(() => {
         if (newTodo?.key) {
-          toaster.success('Your todo was updated');
+          toaster.success('Your todo was updated', { duration: 1 });
         } else {
-          toaster.success('Your todo was created');
+          toaster.success('Your todo was created', { duration: 1 });
         }
         setValue('');
       })
       .catch(() => {
-        toaster.warning('Something went wrong');
+        toaster.warning('Something went wrong', { duration: 1 });
       });
   };
 
@@ -36,20 +36,20 @@ const TodosList = () => {
     todo.message = message;
     Todos.updateOrDestroyTodo(todo, key)
       .then(() => {
-        toaster.success('Your todo was updated');
+        toaster.success('Your todo was updated', { duration: 1 });
       })
       .catch(() => {
-        toaster.warning('Something went wrong');
+        toaster.warning('Something went wrong', { duration: 1 });
       });
   };
 
   const deleteTodo = (key) => {
     Todos.updateOrDestroyTodo(null, key)
       .then(() => {
-        toaster.notify('Your todo was deleted');
+        toaster.notify('Your todo was deleted', { duration: 1 });
       })
       .catch(() => {
-        toaster.warning('Something went wrong');
+        toaster.warning('Something went wrong', { duration: 1 });
       });
   };
 
@@ -79,7 +79,7 @@ const TodosList = () => {
   return (
     <div className="main-container">
       <div className="todos-list-container">
-        <p data-cy="wlecome-header" className="welcome-header">{`Welcome, ${user.email}`}</p>
+        <p data-cy="welcome-header" className="welcome-header">{`Welcome, ${user.email}`}</p>
         <TextField
           id="create-todo"
           value={value}
@@ -89,7 +89,7 @@ const TodosList = () => {
           type="text"
         />
 
-        <ul>
+        <ul id="todos-list">
           {todos.map((todo) => (
             <li key={todo.key}>
               <TodoField

@@ -18,7 +18,7 @@ const SignInView = () => {
 
     Users.signInUser(userForm.email, userForm.password)
       .then(() => {
-        toaster.success('Signed in successfully');
+        toaster.success('Signed in successfully', { duration: 2 });
         navigate('/');
       })
       .catch(() => {

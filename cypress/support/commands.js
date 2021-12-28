@@ -32,3 +32,10 @@ Cypress.Commands.add('signUp', (name, email, password) => {
   cy.get('#confirm-password').type(password);
   cy.get('button[type="submit"]').click();
 });
+
+Cypress.Commands.add('signIn', (email, password) => {
+  cy.contains('p', 'Sign In');
+  cy.get('input#email').type(email);
+  cy.get('input#password').type(password);
+  cy.get('button[type="submit"]').click();
+});
