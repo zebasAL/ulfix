@@ -25,7 +25,7 @@ const SignUpView = () => {
           created_at: Date.now().toString(),
         })
           .then(() => {
-            toaster.success('Signed up successfully');
+            toaster.success('Signed up successfully', { duration: 2 });
             navigate('/');
           })
           .catch(() => {

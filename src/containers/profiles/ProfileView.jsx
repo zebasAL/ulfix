@@ -21,7 +21,7 @@ const Profiles = () => {
   const navigate = useNavigate();
 
   const handleNameUpdate = () => {
-    Users.updateOrDestroyProfile({ ...profile, name }, key)
+    Users.updateOrDestroyProfile({ ...profile, created_at: Date.now().toString(), name }, key)
       .then(() => {
         toaster.success('Name updated successfully');
       })
@@ -95,7 +95,7 @@ const Profiles = () => {
                   Are you sure you want to delete your account?
                 </Dialog>
 
-                <Button textAlign="center" onClick={() => setIsShown(true)}>Delete Account</Button>
+                <Button id="delete-button" textAlign="center" onClick={() => setIsShown(true)}>Delete Account</Button>
               </Pane>
 
             )}

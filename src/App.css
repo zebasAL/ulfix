@@ -37,6 +37,23 @@ html {
   padding-left: 20px;
 }
 
+.remove-default-styles:hover,
+.remove-default-styles:active,
+.remove-default-styles:focus,
+.remove-default-styles:visited,
+.css-12b25td:not([disabled])[aria-expanded="true"] {
+  background-color: #68b4c4 !important;
+}
+
+.remove-default-styles:hover {
+  color: #fdfdfd !important;
+  border: none !important;
+}
+
+.remove-default-styles:focus {
+  box-shadow: none !important;
+}
+
 .main-container {
   margin: 50px 100px;
 }
