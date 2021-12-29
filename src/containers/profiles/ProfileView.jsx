@@ -72,6 +72,7 @@ const Profiles = () => {
           <TextField
             id="name-field"
             value={name}
+            disabled={user.email !== profile.email}
             setValue={setName}
             type="text"
             onSubmit={handleNameUpdate}

@@ -9,6 +9,7 @@ const TextField = ({
   type,
   required,
   id,
+  disabled,
 }) => (
   <div className="todo-field text-field">
     <input
@@ -23,6 +24,7 @@ const TextField = ({
         }
       }}
       required={required}
+      disabled={disabled}
     />
   </div>
 );
@@ -38,12 +40,14 @@ TextField.propTypes = {
   type: PropTypes.string.isRequired,
   required: PropTypes.bool,
   id: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
 };
 
 TextField.defaultProps = {
   onSubmit: () => {},
   label: '',
   required: false,
+  disabled: false,
 };
 
 export default TextField;
