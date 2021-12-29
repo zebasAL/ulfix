@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest/globals": true
     },
     "extends": [
         "plugin:react/recommended",
@@ -17,12 +18,14 @@
     },
     "plugins": [
         "react",
-        "cypress"
+        "cypress",
+        "jest"
     ],
     "rules": {
         "react/function-component-definition": ["off", {
             "namedComponents": "arrow-function",
             "unnamedComponents": "arrow-function"
-          }]
+          }],
+          "react/jsx-props-no-spreading": "off"
     }
 }

@@ -111,7 +111,6 @@ const SignUpView = () => {
           >
             Submit
           </Button>
-          `
         </div>
       </form>
     </div>
